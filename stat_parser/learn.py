@@ -37,19 +37,21 @@ def build_model():
         
         # Keep a part of the treebanks for testing
         i = 0
-        with open(MODEL_TREEBANK, 'w') as model, open(TEST_DAT, 'w') as dat, open(TEST_KEY, 'w') as key:
-            for treebank in [QUESTIONBANK_NORM, PENNTREEBANK_NORM]:
-                for tree in open(treebank):
-                    i += 1
-                    if (i % 100) == 0:
-                        sentence, n = get_sentence(loads(tree))
-                        if n > 7 and n < 20:
-                            dat.write(sentence+'\n')
-                            key.write(tree)
-                        else:
-                            i -= 1
+        with open(MODEL_TREEBANK, 'w') as model:
+            with open(TEST_DAT, 'w') as dat:
+                with open(TEST_KEY, 'w') as key:
+                    for treebank in [QUESTIONBANK_NORM, PENNTREEBANK_NORM]:
+                        for tree in open(treebank):
+                            i += 1
+                            if (i % 100) == 0:
+                                sentence, n = get_sentence(loads(tree))
+                                if n > 7 and n < 20:
+                                    dat.write(sentence+'\n')
+                                    key.write(tree)
+                                else:
+                                    i -= 1
                     
-                    model.write(tree)
+                            model.write(tree)
         
         # Learn PCFG
         pcfg.learn_from_treebanks([MODEL_TREEBANK])
