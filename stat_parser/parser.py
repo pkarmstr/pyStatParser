@@ -2,6 +2,7 @@
 CKY algorithm from the "Natural Language Processing" course by Michael Collins
 https://class.coursera.org/nlangp-001/class
 """
+from multiprocessing import pool, cpu_count
 from collections import defaultdict
 from pprint import pprint
 
@@ -109,6 +110,7 @@ class Parser:
     
     def nltk_parse(self, sentence):
         return nltk_tree(self.raw_parse(sentence))
+
 
 
 def display_tree(tree):
