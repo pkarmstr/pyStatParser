@@ -1,5 +1,6 @@
 from __future__ import division
-from collections import Counter, defaultdict
+from collections import defaultdict
+from counter import Counter
 from json import loads, dumps
 
 from stat_parser.word_classes import word_class
